@@ -1,0 +1,22 @@
+﻿@model List<Noamooz.Core.Models.Product>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List</title>
+</head>
+<body>
+    @foreach (var item in Model)
+    {
+        <p>@item.Name</p>
+        //<p>@item.Price.ToString("c")</p>
+        @item.Price.ToString("c", new System.Globalization.CultureInfo("fa-IR"))
+        <br>
+    }
+</body>
+</html>
