@@ -5,6 +5,7 @@ namespace Noamooz.Web.Controllers
 {
     public class ProductController : Controller
     {
+        public int pageSize = 2;
         public readonly IProductRepository _productRepo;
         public ProductController(IProductRepository productRepo)
         {
@@ -15,9 +16,9 @@ namespace Noamooz.Web.Controllers
             return View(_productRepo.GetAll());
         }
 
-        public IActionResult List()
+        public IActionResult List(int page = 1)
         {
-            return View(_productRepo.GetAll());
+            return View(_productRepo.GetAll().OrderBy(x=> x.ProductId).Skip((page-1)*pageSize).Take(pageSize).ToList());
         }
     }
 }

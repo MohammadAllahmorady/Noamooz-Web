@@ -13,6 +13,7 @@
 <body>
     @foreach (var item in Model)
     {
+        <p>@item.ProductId</p>
         <p>@item.Name</p>
         //<p>@item.Price.ToString("c")</p>
         @item.Price.ToString("c", new System.Globalization.CultureInfo("fa-IR"))
