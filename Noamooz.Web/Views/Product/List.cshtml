@@ -1,4 +1,5 @@
-﻿@model List<Noamooz.Core.Models.Product>
+﻿@using Noamooz.Web.Models.ViewModel
+@model ProductViewModel
 @{
     Layout = null;
 }
@@ -11,13 +12,14 @@
     <title>List</title>
 </head>
 <body>
-    @foreach (var item in Model)
+    @foreach (var item in Model.products)
     {
         <p>@item.ProductId</p>
         <p>@item.Name</p>
-        //<p>@item.Price.ToString("c")</p>
         @item.Price.ToString("c", new System.Globalization.CultureInfo("fa-IR"))
         <br>
     }
+    <div page-model="@Model.pagingInfo" page-action="List"></div>
+    <div></div>
 </body>
 </html>
