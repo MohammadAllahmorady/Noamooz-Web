@@ -30,6 +30,14 @@ namespace Noamooz.Web.Infrastructure
                 TagBuilder tag = new TagBuilder("a");
                 tag.Attributes["href"] = urlHelper.Action(pageAction,new {page=i});
                 tag.InnerHtml.Append(i.ToString());
+                if (i == pageModel.CurrentPage)
+                {
+                    tag.AddCssClass("active rounded");
+                }
+                else
+                {
+                    tag.AddCssClass("rounded");
+                }
                 result.InnerHtml.AppendHtml(tag);
             }
 

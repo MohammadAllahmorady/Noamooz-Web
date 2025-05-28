@@ -1,25 +1,14 @@
 ﻿@using Noamooz.Web.Models.ViewModel
 @model ProductViewModel
 @{
-    Layout = null;
+    Layout = "_Layout";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>List</title>
-</head>
-<body>
-    @foreach (var item in Model.products)
-    {
-        <p>@item.ProductId</p>
-        <p>@item.Name</p>
-        @item.Price.ToString("c", new System.Globalization.CultureInfo("fa-IR"))
-        <br>
-    }
-    <div page-model="@Model.pagingInfo" page-action="List"></div>
-    <div></div>
-</body>
-</html>
+@foreach (var item in Model.products)
+{
+    @await Html.PartialAsync("_ItemProduct", item)
+}
+<div class="col-12">
+    <div page-model="@Model.pagingInfo" page-action="List" class="pagination d-flex justify-content-center mt-5">
+    </div>
+</div>
