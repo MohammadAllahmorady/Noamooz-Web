@@ -1,4 +1,4 @@
-﻿namespace Noamooz.Web.Models.ViewModel
+﻿namespace Noamooz.Core.Models.ViewModel
 {
     public class PagingInformation
     {

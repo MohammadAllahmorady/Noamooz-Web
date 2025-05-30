@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Noamooz.Core.Repositories;
-using Noamooz.Web.Models.ViewModel;
+using Noamooz.Core.Models.ViewModel;
 
 namespace Noamooz.Web.Controllers
 {
     public class ProductController : Controller
     {
-        public int pageSize = 2;
-        public readonly IProductRepository _productRepo;
+        public int pageSize = 6;
+        private readonly IProductRepository _productRepo;
         public ProductController(IProductRepository productRepo)
         {
             _productRepo = productRepo;
@@ -17,21 +17,22 @@ namespace Noamooz.Web.Controllers
             return View(_productRepo.GetAll());
         }
 
-        public IActionResult List(int page = 1)
+        public IActionResult List(int categoryCode,int page = 1)
         {
+            var result = _productRepo.GetProductByCategory(categoryCode);
+        
             return View(new ProductViewModel
             {
-                products = 
-                    _productRepo.GetAll()
-                    .OrderBy(x => x.ProductId)
+                products = result.OrderBy(x => x.ProductId)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize).ToList(),
                 pagingInfo = new PagingInformation
                 {
                     CurrentPage = page,
                     PageSize = pageSize,
-                    TotalRecord = _productRepo.GetAll().Count
-                }
+                    TotalRecord = result.Count
+                },
+                CategoryCode=categoryCode
 
             });
         }

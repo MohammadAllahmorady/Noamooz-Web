@@ -1,0 +1,17 @@
+﻿@using Noamooz.Core.Models
+@using Noamooz.Core.Models.ViewModel
+@model List<CategoryViewModel>
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <li>
+        <div class="d-flex justify-content-between fruite-name">
+            <a style="Color:@(item.CategorId.ToString()==ViewBag.CurrentCategory?"Red":"Green")" asp-action="List" asp-controller="Product" asp-route-categoryCode="@item.CategorId" asp-route-page="1"><i class="fas fa-shopping-bag me-2"></i>&nbsp;@item.CategorName</a>
+            <span>(@item.CountProduct)</span>
+        </div>
+    </li>
+}
+

@@ -33,6 +33,19 @@ namespace Noamooz.Web
             app.UseRouting();
 
             app.UseAuthorization();
+            app.MapControllerRoute(
+                name: "",
+                pattern: "Category{categoryCode:int}/Page{page:int}",
+                defaults:new {controller="Product",action="List"});
+            app.MapControllerRoute(
+                name: "",
+                pattern: "Category{categoryCode:int}",
+                defaults: new { controller = "Product", action = "List", page=1 });
+
+            app.MapControllerRoute(
+                name: "",
+                pattern: "Page{page:int}",
+                defaults: new { controller = "Product", action = "List",categoryCode =1});
 
             app.MapControllerRoute(
                 name: "default",
