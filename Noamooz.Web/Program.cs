@@ -17,6 +17,10 @@ namespace Noamooz.Web
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+
+            builder.Services.AddMemoryCache();
+            builder.Services.AddSession();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -29,6 +33,8 @@ namespace Noamooz.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 

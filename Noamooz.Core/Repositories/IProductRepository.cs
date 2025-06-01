@@ -13,5 +13,6 @@ namespace Noamooz.Core.Repositories
       List<Product> GetProductByCategory(int categoryId);
       public List<Category> GetAllCategory();
       public List<CategoryViewModel> GetCategoryByCountProducts();
+      public Product GetItemProduct(int id);
     }
 }

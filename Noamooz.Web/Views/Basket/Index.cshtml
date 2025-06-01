@@ -1,0 +1,43 @@
+﻿@using Noamooz.Core.Models.ViewModel
+@model List<BasketViewModel>
+@{
+    Layout = "_Layout";
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>نام کالا</th>
+            <th>تعداد</th>
+            <th>قیمت</th>
+            <th>جمع</th>
+            <th>حذف</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.Product.Price</td>
+                <td>@(item.Product.Price * item.Quantity)</td>
+                <td><a asp-action="RemoveFromBasket" asp-controller="Basket" asp-route-productId="@item.Product.ProductId" class="btn btn-danger">حذف</a></td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">جمع کل سبد خرید</td>
+            <td>@Model.Sum(x => x.Quantity * x.Product.Price).ToString("c", new System.Globalization.CultureInfo("fa-IR"))</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <a asp-action="List" asp-controller="Product" class="btn btn-success">ادامه خرید</a>
+                <a asp-action="Checkout" asp-controller="Product" class="btn btn-danger">نهایی کردن خرید</a>
+            </td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>

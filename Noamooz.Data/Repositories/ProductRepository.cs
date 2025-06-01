@@ -46,5 +46,10 @@ namespace Noamooz.Data.Repository
                 };
             return result.ToList();
         }
+
+        public Product GetItemProduct(int id)
+        {
+            return _context.Products.Where(x=> x.ProductId==id).FirstOrDefault();
+        }
     }
 }
