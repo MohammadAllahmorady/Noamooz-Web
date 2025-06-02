@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+
+<div class="row">
+    <div class="col-12" style="text-align:center">
+        @if (@TempData["Message"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @TempData["Message"]
+            </div>
+        }
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-12" style="text-align:center">
+        <div>
+            <h1>ورود به فروشگاه</h1>
+
+            <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Login">
+                <p><input type="text" name="username" value="" placeholder="نام کاربری" required></p>
+                <p><input type="password" name="password" value="" placeholder="کلمه عبور" required></p>
+                <p>
+                    <label>
+                        <input type="checkbox" name="remember_me" id="remember_me">
+                        مرا به خاطر بسپار
+                    </label>
+                </p>
+                <p><input type="submit" name="commit" value="ورود"></p>
+                <hr />
+
+            </form>
+        </div>
+    </div>
+</div>

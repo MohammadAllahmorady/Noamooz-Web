@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "_Layout";
+}
+<div class="row">
+    <div class="col-12" style="text-align:center">
+
+        @if (@TempData["Message"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @TempData["Message"]
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-12" style="text-align:center">
+        <div>
+            <h1>ثبت نام کاربر</h1>
+
+            <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Register">
+                <p><input type="text" name="username" value="" placeholder="نام کاربری" required></p>
+                <p><input type="password" name="password" value="" placeholder="کلمه عبور" required></p>
+                <p>
+                    <label>
+                        <input type="checkbox" name="remember_me" id="remember_me">
+                        مرا بخاطر بسپار
+                    </label>
+                </p>
+                <p class="submit"><input type="submit" name="commit" value="ثبت نام"></p>
+                <hr />
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -12,7 +12,7 @@ namespace Noamooz.Web.Controllers
 
         public BasketController(IProductRepository context)
         {
-            _context=context;
+            _context = context;
         }
         public IActionResult Index()
         {
@@ -21,15 +21,15 @@ namespace Noamooz.Web.Controllers
 
         public IActionResult AddToBasket(int productId)
         {
-           var item= _context.GetItemProduct(productId);
-           if (item != null)
-           {
-               SaveInSession(item); 
-           }
+            var item = _context.GetItemProduct(productId);
+            if (item != null)
+            {
+                SaveInSession(item);
+            }
             return RedirectToAction("Index");
         }
 
-        public ActionResult RemoveFromBasket(int productid)
+        public IActionResult RemoveFromBasket(int productid)
         {
             var item = _context.GetItemProduct(productid);
 
@@ -42,7 +42,7 @@ namespace Noamooz.Web.Controllers
         private void SaveInSession(Product item)
         {
             var basket = GetBasketSession();
-            int index =basket.FindIndex(x => x.Product.ProductId == item.ProductId);
+            int index = basket.FindIndex(x => x.Product.ProductId == item.ProductId);
             if (index != -1)
             {
                 basket[index].Quantity += 1;
@@ -54,8 +54,8 @@ namespace Noamooz.Web.Controllers
                     Product = item,
                     Quantity = 1
                 });
-                HttpContext.Session.SetJson("ses_basket",basket);
             }
+            HttpContext.Session.SetJson("ses_basket", basket);
         }
 
         private void DeleteFromSession(Product item)
@@ -64,7 +64,7 @@ namespace Noamooz.Web.Controllers
             int index = basket.FindIndex(x => x.Product.ProductId == item.ProductId);
             if (index != -1)
             {
-              basket.RemoveAt(index);
+                basket.RemoveAt(index);
             }
             HttpContext.Session.SetJson("ses_basket", basket);
         }

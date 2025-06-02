@@ -1,3 +1,4 @@
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Noamooz.Core.Repositories;
 using Noamooz.Data.Models;
@@ -12,6 +13,23 @@ namespace Noamooz.Web
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<ApplicationDbContext>(option =>
                 option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+            // Identity بخش مربوط به
+            builder.Services.AddDbContext<AppIdentityDbContext>(option =>
+                option.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
+
+
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 5;
+                options.Password.RequireNonAlphanumeric =
+                    false; //این بعنی از کارکتر های ویژه نیازی نیست در پسورد استفاده کرد
+                options.Password.RequireDigit = false; //این یعنی عدد هم نیازی نیست در پسورد
+                options.Password.RequireUppercase = false;
+            }).AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
+            //Identity  پایان
+
             builder.Services.AddTransient<IProductRepository,ProductRepository>();
 
             // Add services to the container.
@@ -38,6 +56,7 @@ namespace Noamooz.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllerRoute(
                 name: "",
